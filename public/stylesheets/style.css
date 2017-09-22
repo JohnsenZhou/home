@@ -1,0 +1,85 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+  background: #fff;
+	margin: 0rem;
+	min-height: 100vh;
+	font-family: Futura, sans-serif;
+	font-size: 14px;
+}
+a {
+	text-decoration: none;
+}
+::selection {
+	background: rgba(76, 175, 80, 0.67);
+	color: #fff;
+}
+.info-content {
+	position: absolute;
+	top: 50%;	
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.typed, .typed-cursor {
+	color: #333;
+	font-size: 3em;
+	text-shadow: rgba(24, 24, 24, 0.6) 1px 2px 2px;
+}
+
+.typed-cursor{
+	opacity: 1;
+	font-weight: 100;
+	-webkit-animation: blink 1s infinite;
+	-moz-animation: blink 1s infinite;
+	-ms-animation: blink 1s infinite;
+	-o-animation: blink 1s infinite;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-ms-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-o-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+
+.sites {
+	margin-top: 1em;
+	text-align: center;
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+	color: #777;
+}
+.sites-content {
+	margin-top: 2em;
+}
+.sites-content a {
+	color: #777;
+}
+.sites-content a:hover {
+  color: #00B7FF;
+}
+.sites-content p {
+	margin-bottom: .8em;
+}
