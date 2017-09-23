@@ -5,14 +5,14 @@
   }
 
   const opts = { 
-    particleColor: "rgb(139,195,74)",
-    lineColor: "rgb(214,217,213)",
-    particleAmount: 80,
-    defaultSpeed: 0.4,
+    particleColor: "rgb(233,233,233)",
+    lineColor: "rgb(233,233,233)",
+    particleAmount: 40,
+    defaultSpeed: 0.2,
     variantSpeed: 0.5,
-    defaultRadius: 2,
-    variantRadius: 2,
-    linkRadius: 200,
+    defaultRadius: 4,
+    variantRadius: 6,
+    linkRadius: 400,
   };
 
   window.addEventListener("resize", function(){

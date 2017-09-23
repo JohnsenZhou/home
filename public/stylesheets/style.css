@@ -13,7 +13,7 @@ a {
 	text-decoration: none;
 }
 ::selection {
-	background: rgba(76, 175, 80, 0.67);
+	background: rgba(3, 169, 244, 0.56);
 	color: #fff;
 }
 .info-content {
@@ -25,7 +25,7 @@ a {
 .typed, .typed-cursor {
 	color: #333;
 	font-size: 3em;
-	text-shadow: rgba(24, 24, 24, 0.6) 1px 2px 2px;
+	/* text-shadow: rgba(24, 24, 24, 0.6) 1px 2px 2px; */
 }
 
 .typed-cursor{
@@ -70,7 +70,7 @@ a {
 	text-align: center;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	font-size: 1.2em;
-	color: #777;
+	color: #2196F3;
 	transition: all .6s;
 	-moz-transition: all .6s; /* Firefox 4 */
 	-webkit-transition: all .6s; /* Safari and Chrome */
