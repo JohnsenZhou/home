@@ -1,6 +1,6 @@
 require(['lib/typed.min'], function(Typed) {
   const typed = new Typed('.typed', {
-    strings: ["<strong>I'm a web developer.</strong>", "<strong>I'm a designer.</strong>", "<strong>I'm Johnsen.</strong>"],
+    strings: ["<strong>I'm a web developer.</strong>", "<strong>I'm a designer.</strong>", "<strong>I'm Johnsen Zhou.</strong>"],
       typeSpeed: 80,
       backSpeed: 80,
       cursorChar: '|',
@@ -8,5 +8,9 @@ require(['lib/typed.min'], function(Typed) {
       backDelay: 1000,
       autoInsertCss: true,
       // loop: true
+      onComplete: (self) => {
+        // console.log(self)
+        $('.sites').addClass('sites-animate')
+      }
   })
 })
