@@ -92,3 +92,20 @@ a {
 .sites-content p {
 	margin-bottom: .8em;
 }
+.footer {
+	opacity: 0;
+	position: absolute;
+	width: 100%;
+	bottom: 4em;
+	text-align: center;
+	font-family: Optima,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+	color: #999;
+	transition: all .6s;
+	-moz-transition: all .6s; /* Firefox 4 */
+	-webkit-transition: all .6s; /* Safari and Chrome */
+	-o-transition: all .6s; /* Opera */
+}
+.footer-animate {
+	opacity: 1;
+	bottom: 3em;
+}

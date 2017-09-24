@@ -31,6 +31,7 @@ require(['lib/typed.min'], function(Typed) {
       // loop: true
       onComplete: (self) => {
         $('.sites').addClass('sites-animate');
+        $('.footer').addClass('footer-animate');
         setColor();
       }
   })
