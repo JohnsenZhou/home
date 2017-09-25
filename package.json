@@ -19,8 +19,9 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
-    "nodemon": "^1.12.1"
+    "gulp-nodemon": "^2.2.1"
   }
 }
