@@ -5,19 +5,44 @@
   }
 
   const opts = { 
-    particleColor: "rgb(233,233,233)",
-    lineColor: "rgb(233,233,233)",
-    particleAmount: 40,
-    defaultSpeed: 0.2,
-    variantSpeed: 0.5,
-    defaultRadius: 4,
-    variantRadius: 6,
-    linkRadius: 400,
+    particleColor: "rgb(233,233,233)",  // 粒子颜色
+    lineColor: "rgb(233,233,233)",  // 连接线颜色
+    particleAmount: 40,  // 粒子数量
+    defaultSpeed: 0.2,  // 基本速度
+    variantSpeed: 0.5,  // 随机速度增长量 Math.random() * xx
+    defaultRadius: 4,  // 基本半径
+    variantRadius: 6,  // 随机半径增长量 Math.random() * xx
+    linkRadius: 400,  //连线最大距离
   };
 
+  // 监听窗口变化
   window.addEventListener("resize", function(){
     deBouncer();
   });
+  // 鼠标移入加粒子
+  // Currentcle = function(x, y) {
+  //   this.x = x;
+  //   this.y = y;
+  //   this.radius = 8;
+  //   this.color= 'red';
+  //   this.draw = function(ctx) {
+  //     ctx.beginPath();
+  //     ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+  //     ctx.closePath();
+  //     ctx.fillStyle = this.color;
+  //     ctx.fill();
+  //   }
+  // }
+  // let currentBall = new Currentcle();
+  // window.addEventListener('mousemove', function(e) {
+  //   currentBall.x = e.clientX;
+  //   currentBall.y = e.clientY;
+  // })
+  // // 鼠标移出
+  // window.addEventListener('mouseout', function(e) {
+  //   currentBall.x = -1000;
+  //   currentBall.y = -1000;
+  // })
 
   let deBouncer = function() {
       clearTimeout(tid);
@@ -47,8 +72,8 @@
   }
 
   Particle = function(xPos, yPos){ 
-    this.x = Math.random() * w; 
-    this.y = Math.random() * h;
+    this.x = xPos || Math.random() * w; 
+    this.y = yPos || Math.random() * h;
     this.speed = opts.defaultSpeed + Math.random() * opts.variantSpeed; 
     this.directionAngle = Math.floor(Math.random() * 360); 
     this.color = opts.particleColor;
@@ -102,6 +127,9 @@
     for (let i = 0; i < particles.length; i++){
       linkPoints(particles[i], particles);
     }
+    // 鼠标移入加粒子
+    // currentBall.draw(drawArea);
+    // linkPoints(currentBall, particles);
   }
 
   const canvasBody = document.getElementById("canvas"),

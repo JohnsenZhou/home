@@ -1,0 +1,12 @@
+<div class="demo-content">
+  {{#each githubList}}
+    <div class="demo-item" data-url={{url}}>
+      <p class="demo-title">{{name}}</p>
+      <p class="demo-icon">
+        <iframe src="https://ghbtns.com/github-btn.html?user=johnsenzhou&repo={{name}}&type=star&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=johnsenzhou&repo={{name}}&type=fork&count=true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </p>
+      <p>{{description}}</p>
+    </div>
+  {{/each}}
+</div>

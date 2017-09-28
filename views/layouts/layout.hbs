@@ -6,8 +6,11 @@
     <meta name="description" content="Johnsen Zhou"/>
     <meta name="keywords" content="Johnsen"/>
     <title>Johnsen Zhou</title>
-    <link href="./images/favicon.ico" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    {{#if isdemo}}
+        <link rel="stylesheet" href="/stylesheets/demo.css">
+    {{/if}}
 </head>
 <body>
     <canvas id="canvas"></canvas>
@@ -16,8 +19,14 @@
     <!--引入底部栏模板-->
     {{> footer}}
 
-     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <script src="./javascripts/main.js"></script>
-    <script src="./javascripts/lib/require.js" data-main="./javascripts/typed"></script>
+    
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+    {{#if typed}}
+        <script src="/javascripts/lib/require.js" data-main="./javascripts/typed"></script>
+    {{/if}}
+    {{#if isdemo}}
+        <script src="/javascripts/demo.js"></script>
+    {{/if}}
 </body>
 </html>

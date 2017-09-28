@@ -3,11 +3,12 @@
 	padding: 0;
 }
 body {
-  background: #fff;
 	margin: 0rem;
 	min-height: 100vh;
 	font-family: Futura, sans-serif;
 	font-size: 14px;
+  background: #fff;
+	color: #999;
 }
 a {
 	text-decoration: none;
@@ -16,7 +17,9 @@ a {
 	background: rgba(3, 169, 244, 0.56);
 	color: #fff;
 }
-.info-content {
+
+/* 主页样式 */
+.info-content, .error-content {
 	position: absolute;
 	top: 50%;	
 	left: 50%;
@@ -92,6 +95,25 @@ a {
 .sites-content p {
 	margin-bottom: .8em;
 }
+
+/* 错误页样式 */
+.error-content {
+	display: table-cell;
+	text-align: center;
+}
+.error-title {
+	margin-bottom: 0.5em;
+	font-size: 3em;
+	color: rgba(244, 67, 54, 0.86);
+}
+.error-content img {
+	margin-top: 2em;
+}
+.error-return {
+	color: #2196f3;
+}
+
+/* 底部样式 */
 .footer {
 	opacity: 0;
 	position: absolute;
