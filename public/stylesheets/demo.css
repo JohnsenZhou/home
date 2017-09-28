@@ -1,7 +1,7 @@
 .demo-content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -9,10 +9,6 @@
   max-height: 600px;
   overflow: auto;
   transform: translate(-50%, -50%);
-}
-.demo-content:after {
-  content: "";
-  flex: auto;
 }
 .demo-item {
   width: 220px;
