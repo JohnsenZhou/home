@@ -13,20 +13,21 @@ const cherrypick = (value) => {
 }
 
 const getGithubDetail = (req, res, next) => {
-  projectNames = ['vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
+  projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
   console.time('getGithubData');
   let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=3d1d616000bdbea08f87a4e09d03be7bfdfba15d`);
+    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=a1ab16f5d0d96118b04b82ab8ae146496c19421e`);
   });
   axios.all(axiosList)
-    .then(axios.spread((vue, react, swiper, node) => {
+    .then(axios.spread((checklist, vue, react, swiper, node) => {
+      checklistDetail = cherrypick(checklist);
       vueDetail = cherrypick(vue);
       reactDetail = cherrypick(react);
       swiperDetail = cherrypick(swiper);
       nodeApp = cherrypick(node);
 
-      res.locals = { vueDetail, reactDetail, swiperDetail, nodeApp };
+      res.locals = { checklistDetail, vueDetail, reactDetail, swiperDetail, nodeApp };
       console.timeEnd('getGithubData');
       next();
     }))
@@ -43,7 +44,7 @@ router.get('/', function(req, res) {
 /* GET open sources page. */
 router.get('/opensources', getGithubDetail, function(req, res) {
   const githubDetail = res.locals;
-  const githubList = [githubDetail.vueDetail, githubDetail.reactDetail, githubDetail.swiperDetail, githubDetail.nodeApp];
+  const githubList = [githubDetail.checklistDetail, githubDetail.vueDetail, githubDetail.reactDetail, githubDetail.swiperDetail, githubDetail.nodeApp];
   // console.log(githubList)
   res.render('pages/demo', { isdemo: true, githubList });
 });
