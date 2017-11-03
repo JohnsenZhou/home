@@ -48,6 +48,10 @@ router.get('/opensources', getGithubDetail, function(req, res) {
   // console.log(githubList)
   res.render('pages/demo', { isdemo: true, githubList });
 });
+/* GET socket.io page. */
+router.get('/socket', function(req, res) {
+  res.render('pages/socket', { isSocket: true, layout: 'socket-layout' });
+});
 
 module.exports = router;
 

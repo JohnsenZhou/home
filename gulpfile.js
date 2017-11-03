@@ -13,7 +13,7 @@ const nodemon = require('gulp-nodemon');
 
 gulp.task('nodemon', () => {
   return nodemon({
-    script: 'bin/www',
+    script: 'server',
     env: { 'NODE_ENV': 'development' }
   })
 });
