@@ -9,6 +9,7 @@ $(function() {
 
   // Initialize variables
   var $window = $(window);
+  var $sendIcon = $('.sendIcon');
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputBox = $('.inputBox');
@@ -226,6 +227,11 @@ $(function() {
         setUsername();
       }
     }
+  });
+
+  // Send event
+  $sendIcon.click(function() {
+    sendMessage();
   });
 
   $inputMessage.on('input', function() {
