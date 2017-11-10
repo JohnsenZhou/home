@@ -1,6 +1,6 @@
 {
   "name": "home",
-  "script": "bin/www",
+  "script": "server.js",
   "env": {
     "NODE_ENV": "production",
     "PORT": 8008
