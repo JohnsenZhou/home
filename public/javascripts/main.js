@@ -1,4 +1,8 @@
 (function() {
+  // 判断移动设备
+  const deviceAgent = window.navigator.userAgent.toLowerCase();
+  let isMob = deviceAgent.match(/(iphone|ipod|android)/) ? true : false
+
   let resizeReset = function() {
     w = canvasBody.width = window.innerWidth;
     h = canvasBody.height = window.innerHeight;
@@ -7,7 +11,7 @@
   const opts = { 
     particleColor: "rgb(233,233,233)",  // 粒子颜色
     lineColor: "rgb(233,233,233)",  // 连接线颜色
-    particleAmount: 40,  // 粒子数量
+    particleAmount: isMob ? 16 : 40,  // 粒子数量
     defaultSpeed: 0.2,  // 基本速度
     variantSpeed: 0.5,  // 随机速度增长量 Math.random() * xx
     defaultRadius: 4,  // 基本半径
