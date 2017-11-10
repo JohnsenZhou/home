@@ -11,10 +11,13 @@ $(function() {
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
+  var $inputBox = $('.inputBox');
   var $inputMessage = $('.inputMessage'); // Input message input box
 
+  var $chatBox = $('.pages'); // The chat box
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
+  var $chatTitle = $('.chatTitle'); // The chatTitle nav
 
   // Prompt for setting a username
   var username;
@@ -42,7 +45,10 @@ $(function() {
     // If the username is valid
     if (username) {
       $loginPage.fadeOut();
+      $chatBox.css('paddingTop', '50px');
       $chatPage.show();
+      $chatTitle.show();
+      $inputBox.show();
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
@@ -84,18 +90,26 @@ $(function() {
       $typingMessages.remove();
     }
 
+    var $massageTimeDiv = $('<span class="massageTime">')
+      .text(dateFormat());
     var $usernameDiv = $('<span class="username"/>')
       .text(data.username)
-      .css('color', getUsernameColor(data.username));
-    var $messageBodyDiv = $('<span class="messageBody">')
-      .text(data.message);
+      .css('color', getUsernameColor(data.username))
+      .append($massageTimeDiv);
+    var $messageBodyDiv = $('<div class="messageBody">')
+      .text(data.message)
 
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
       .data('username', data.username)
       .addClass(typingClass)
-      .append($usernameDiv, $messageBodyDiv);
 
+    if (username === data.username) {
+      $usernameDiv.css('textAlign', 'right');
+      $messageBodyDiv.css('float', 'right');
+    }
+    
+    $messageDiv.append($usernameDiv, $messageBodyDiv);
     addMessageElement($messageDiv, options);
   }
 
@@ -174,6 +188,13 @@ $(function() {
     return $('.typing.message').filter(function (i) {
       return $(this).data('username') === data.username;
     });
+  }
+
+  // Format date
+  function dateFormat() {
+    var now = new Date();
+    var formatTime = now.Format('hh:mm');
+    return formatTime;
   }
 
   // Gets the color of a username through our hash function

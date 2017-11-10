@@ -31,6 +31,19 @@ ul {
   word-wrap: break-word;
 }
 
+.chatTitle {
+  position: fixed;
+  display: none;
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  background: #6088e6;
+  z-index: 9999;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+}
+
 /* Pages */
 
 .pages {
@@ -120,7 +133,20 @@ ul {
   height: 100%;
   margin: 0;
   overflow-y: scroll;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px 80px 20px;
+}
+
+.message {
+  /* height: 50px; */
+}
+
+.message::after {
+  content: '.';
+  display: block;
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  clear: both;
 }
 
 .message.typing .messageBody {
@@ -128,22 +154,56 @@ ul {
 }
 
 .username {
-  font-weight: 700;
-  overflow: hidden;
-  padding-right: 15px;
-  text-align: right;
+  display: block;
+  padding: 5px 0;
+  /* text-align: right; */
+  font-size: 16px;
+  /* font-weight: 700; */
 }
 
-/* Input */
+.massageTime {
+  padding-left: 1em;
+  font-size: 12px;
+  color: #696969;
+}
 
+.messageBody {
+  display: inline-block;
+  max-width: 90%;
+  margin-bottom: 6px;
+  padding: 4px 10px;
+  font-size: 14px;
+  border: 1px solid #6088e6;
+  border-radius: 6px;
+  background: #6088e6;
+  color: #fff;
+  font-weight: 400;
+}
+
+/* .messageBody::before {
+  position: absolute;
+  content: ' ';
+  top: 10px;
+  left: -21px;
+  border-top: 10px transparent dashed;
+  border-left: 10px transparent dashed;
+  border-right: 10px #ccc solid;
+  border-bottom: 10px transparent dashed;
+} */
+
+/* Input */
+.inputBox {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 60px;
+  bottom: 0;
+  border-top: 1px solid #6088e6;
+}
 .inputMessage {
-  border: 10px solid #000;
   bottom: 0;
   height: 60px;
-  left: 0;
   outline: none;
   padding-left: 10px;
-  position: absolute;
-  right: 0;
   width: 100%;
 }
