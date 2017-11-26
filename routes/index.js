@@ -54,4 +54,3 @@ router.get('/socket', function(req, res) {
 });
 
 module.exports = router;
-
