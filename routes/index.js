@@ -17,7 +17,7 @@ const getGithubDetail = (req, res, next) => {
   
   console.time('getGithubData');
   let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=27621dbd61a8ecca71137176cd3fd989b356fb04`);
+    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=c2ab8715159c767d1b1514e9336cf746f2339572`);
   });
   axios.all(axiosList)
     .then(axios.spread((checklist, vue, react, swiper, node) => {
