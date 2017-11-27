@@ -9,25 +9,26 @@
     <title>Johnsen Zhou</title>
     <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" href="/stylesheets/style.css">
+    {{#if isSocket}}
+        <link rel="stylesheet" href="/stylesheets/socket.css">
+    {{/if}}
     {{#if isdemo}}
         <link rel="stylesheet" href="/stylesheets/demo.css">
     {{/if}}
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    {{#if isSocket}}
+
+    {{else}}
+        <canvas id="canvas"></canvas>
+    {{/if}}
+    
     {{!--index body--}}
     {{{body}}}
     <!--引入底部栏模板-->
     {{> footer}}
-
     
     <script src="/javascripts/lib/jquery.min.js"></script>
-    <script src="/javascripts/main.js"></script>
-    {{#if typed}}
-        <script src="/javascripts/lib/require.js" data-main="./javascripts/typed"></script>
-    {{/if}}
-    {{#if isdemo}}
-        <script src="/javascripts/demo.js"></script>
-    {{/if}}
+    <script src="/javascripts/lib/require.js" data-main="./javascripts/main"></script>
 </body>
 </html>

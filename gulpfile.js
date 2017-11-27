@@ -26,7 +26,7 @@ gulp.task('dev', ['nodemon'], () => {
     open: false
     
   });
-  gulp.watch(['./views/*', './public/*'], ['file-watch'])
+  gulp.watch(['./views/*', './views/*/*', './public/*/*'], ['file-watch'])
     // .on('change', browserSync.reload());
 })
 
