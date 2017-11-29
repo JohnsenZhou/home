@@ -1,7 +1,9 @@
 define([], function() {
   // 判断移动设备
   var deviceAgent = window.navigator.userAgent.toLowerCase();
-  var isMob = deviceAgent.match(/(iphone|ipod|android)/) ? true : false
+  var isMob = deviceAgent.match(/(iphone|ipod|android)/) ? true : false;
+  var canvasBody,
+      drawArea;
 
   var resizeReset = function() {
     w = canvasBody.width = window.innerWidth;
@@ -19,10 +21,6 @@ define([], function() {
     linkRadius: 400,  //连线最大距离
   };
 
-  // 监听窗口变化
-  window.addEventListener("resize", function(){
-    deBouncer();
-  });
   // 鼠标移入加粒子
   // Currentcle = function(x, y) {
   //   this.x = x;
@@ -65,7 +63,7 @@ define([], function() {
       var opacity = 1 - distance / opts.linkRadius;
       if (opacity > 0) { 
         drawArea.lineWidth = 0.5;
-        drawArea.strokeStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity})`;
+        drawArea.strokeStyle = 'rgba(233, 233, 233, '+ opacity +')';
         drawArea.beginPath();
         drawArea.moveTo(point1.x, point1.y);
         drawArea.lineTo(hubs[i].x, hubs[i].y);
@@ -136,15 +134,23 @@ define([], function() {
     // linkPoints(currentBall, particles);
   }
 
-  var canvasBody = document.getElementById("canvas"),
-      drawArea = canvasBody.getContext("2d");
   var delay = 200, tid,
       rgb = opts.lineColor.match(/\d+/g);
 
   var CanvasBk = {
     init: function() {
-      setup();
-      resizeReset();
+      var path = location.pathname;
+      if (path !== "/socket") {
+        // 监听窗口变化
+        window.addEventListener("resize", function(){
+          deBouncer();
+        });
+        canvasBody = document.getElementById("canvas");
+        drawArea = canvasBody.getContext("2d");
+        
+        setup();
+        resizeReset();
+      }
     }
   }
   return CanvasBk;

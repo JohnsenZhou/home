@@ -4,16 +4,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Johnsen Zhou"/>
-    <meta name="keywords" content="Johnsen"/>
+    <meta name="description" content="Johnsen Zhou的个人站点"/>
+    <meta name="keywords" content="Johnsen, 博客"/>
+    <meta name="author" content="Johnsen">
     <title>Johnsen Zhou</title>
-    <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    {{#if isSocket}}
-        <link rel="stylesheet" href="/stylesheets/socket.css">
-    {{/if}}
-    {{#if isdemo}}
-        <link rel="stylesheet" href="/stylesheets/demo.css">
+    <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
+    {{#if isProd}}
+        <link rel="stylesheet" href="/css/app.css">
+    {{else}}
+        <link rel="stylesheet" href="/dev/app.css">
     {{/if}}
 </head>
 <body>
@@ -28,7 +27,11 @@
     <!--引入底部栏模板-->
     {{> footer}}
     
-    <script src="/javascripts/lib/jquery.min.js"></script>
-    <script src="/javascripts/lib/require.js" data-main="./javascripts/main"></script>
+    <script src="/lib/jquery.min.js"></script>
+    {{#if isProd}}
+        <script src="/lib/require.js" data-main="./js/main"></script>
+    {{else}}
+        <script src="/lib/require.js" data-main="./js/main"></script>
+    {{/if}}
 </body>
 </html>
