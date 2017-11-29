@@ -13,8 +13,10 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "express-handlebars": "^3.0.0",
+    "gulp-clean-css": "^3.9.0",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",
+    "save-dev": "^2.0.0",
     "serve-favicon": "~2.4.2",
     "socket.io": "^2.0.4",
     "typed.js": "^2.0.5"
@@ -25,6 +27,12 @@
     "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
-    "gulp-nodemon": "^2.2.1"
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^1.8.9",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-requirejs-optimize": "^1.2.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^3.0.0"
   }
 }

@@ -78,7 +78,7 @@
 }
 .git-star, .git-fork {
   padding-left: 20px;
-  background: url(../images/github.png) left center no-repeat;
+  background: url(../img/github.png) left center no-repeat;
   background-size: 16px 16px;
   text-shadow: 0 1px 0 #fff;
 }

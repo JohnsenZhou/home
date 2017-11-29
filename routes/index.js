@@ -17,7 +17,7 @@ const getGithubDetail = (req, res, next) => {
   
   console.time('getGithubData');
   let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=c2ab8715159c767d1b1514e9336cf746f2339572`);
+    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=d38e228669254510f5b03bc687a78ad90be9f1ad`);
   });
   axios.all(axiosList)
     .then(axios.spread((checklist, vue, react, swiper, node) => {
@@ -50,7 +50,7 @@ router.get('/opensources', getGithubDetail, function(req, res) {
 });
 /* GET socket.io page. */
 router.get('/socket', function(req, res) {
-  res.render('pages/socket', { isSocket: true, layout: 'socket-layout' });
+  res.render('pages/socket', { isSocket: true });
 });
 
 module.exports = router;

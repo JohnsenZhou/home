@@ -1,14 +1,16 @@
-(function() {
+define([], function() {
   // 判断移动设备
-  const deviceAgent = window.navigator.userAgent.toLowerCase();
-  let isMob = deviceAgent.match(/(iphone|ipod|android)/) ? true : false
+  var deviceAgent = window.navigator.userAgent.toLowerCase();
+  var isMob = deviceAgent.match(/(iphone|ipod|android)/) ? true : false;
+  var canvasBody,
+      drawArea;
 
-  let resizeReset = function() {
+  var resizeReset = function() {
     w = canvasBody.width = window.innerWidth;
     h = canvasBody.height = window.innerHeight;
   }
 
-  const opts = { 
+  var opts = { 
     particleColor: "rgb(233,233,233)",  // 粒子颜色
     lineColor: "rgb(233,233,233)",  // 连接线颜色
     particleAmount: isMob ? 16 : 40,  // 粒子数量
@@ -19,10 +21,6 @@
     linkRadius: 400,  //连线最大距离
   };
 
-  // 监听窗口变化
-  window.addEventListener("resize", function(){
-    deBouncer();
-  });
   // 鼠标移入加粒子
   // Currentcle = function(x, y) {
   //   this.x = x;
@@ -37,7 +35,7 @@
   //     ctx.fill();
   //   }
   // }
-  // let currentBall = new Currentcle();
+  // var currentBall = new Currentcle();
   // window.addEventListener('mousemove', function(e) {
   //   currentBall.x = e.clientX;
   //   currentBall.y = e.clientY;
@@ -48,24 +46,24 @@
   //   currentBall.y = -1000;
   // })
 
-  let deBouncer = function() {
+  var deBouncer = function() {
       clearTimeout(tid);
       tid = setTimeout(function() {
           resizeReset();
       }, delay);
   };
 
-  let checkDistance = function(x1, y1, x2, y2){ 
+  var checkDistance = function(x1, y1, x2, y2){ 
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
   };
 
-  let linkPoints = function(point1, hubs){ 
-    for (let i = 0; i < hubs.length; i++) {
-      let distance = checkDistance(point1.x, point1.y, hubs[i].x, hubs[i].y);
-      let opacity = 1 - distance / opts.linkRadius;
+  var linkPoints = function(point1, hubs){ 
+    for (var i = 0; i < hubs.length; i++) {
+      var distance = checkDistance(point1.x, point1.y, hubs[i].x, hubs[i].y);
+      var opacity = 1 - distance / opts.linkRadius;
       if (opacity > 0) { 
         drawArea.lineWidth = 0.5;
-        drawArea.strokeStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity})`;
+        drawArea.strokeStyle = 'rgba(233, 233, 233, '+ opacity +')';
         drawArea.beginPath();
         drawArea.moveTo(point1.x, point1.y);
         drawArea.lineTo(hubs[i].x, hubs[i].y);
@@ -115,7 +113,7 @@
   function setup(){ 
     particles = [];
     resizeReset();
-    for (let i = 0; i < opts.particleAmount; i++){
+    for (var i = 0; i < opts.particleAmount; i++){
       particles.push( new Particle() );
     }
     window.requestAnimationFrame(loop);
@@ -124,11 +122,11 @@
   function loop(){ 
     window.requestAnimationFrame(loop);
     drawArea.clearRect(0,0,w,h);
-    for (let i = 0; i < particles.length; i++){
+    for (var i = 0; i < particles.length; i++){
       particles[i].update();
       particles[i].draw();
     }
-    for (let i = 0; i < particles.length; i++){
+    for (var i = 0; i < particles.length; i++){
       linkPoints(particles[i], particles);
     }
     // 鼠标移入加粒子
@@ -136,10 +134,24 @@
     // linkPoints(currentBall, particles);
   }
 
-  const canvasBody = document.getElementById("canvas"),
-  drawArea = canvasBody.getContext("2d");
-  let delay = 200, tid,
-  rgb = opts.lineColor.match(/\d+/g);
-  resizeReset();
-  setup();
-})()
+  var delay = 200, tid,
+      rgb = opts.lineColor.match(/\d+/g);
+
+  var CanvasBk = {
+    init: function() {
+      var path = location.pathname;
+      if (path !== "/socket") {
+        // 监听窗口变化
+        window.addEventListener("resize", function(){
+          deBouncer();
+        });
+        canvasBody = document.getElementById("canvas");
+        drawArea = canvasBody.getContext("2d");
+        
+        setup();
+        resizeReset();
+      }
+    }
+  }
+  return CanvasBk;
+});
