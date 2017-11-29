@@ -1,4 +1,4 @@
-define(['lib/socket.io'], function(io) {
+define(["../lib/socket.io"], function(io) {
   // 时间格式化
   Date.prototype.Format = function(fmt) {
     var o = {   
@@ -17,6 +17,35 @@ define(['lib/socket.io'], function(io) {
     fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
     return fmt;   
   }
+
+  var FADE_TIME = 150; // ms
+  var TYPING_TIMER_LENGTH = 400; // ms
+  var COLORS = [
+    '#e21400', '#91580f', '#f8a700', '#f78b00',
+    '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+    '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+  ];
+
+  // Initialize variables
+  var $window,
+      $sendIcon,
+      $usernameInput,
+      $messages,
+      $inputBox,
+      $inputMessage,
+
+      $chatBox,
+      $loginPage,
+      $chatPage,
+      $chatTitle,
+
+  // Prompt for setting a username
+      username,
+      connected,
+      typing,
+      lastTypingTime,
+      $currentInput,
+      socket;
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -202,129 +231,132 @@ define(['lib/socket.io'], function(io) {
   // Keyboard events
   var Socketing = {
     init: function() {
-      var FADE_TIME = 150; // ms
-      var TYPING_TIMER_LENGTH = 400; // ms
-      var COLORS = [
-        '#e21400', '#91580f', '#f8a700', '#f78b00',
-        '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-        '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
-      ];
-    
-      // Initialize variables
-      var $window = $(window);
-      var $sendIcon = $('.sendIcon');
-      var $usernameInput = $('.usernameInput'); // Input for username
-      var $messages = $('.messages'); // Messages area
-      var $inputBox = $('.inputBox');
-      var $inputMessage = $('.inputMessage'); // Input message input box
-    
-      var $chatBox = $('.pages'); // The chat box
-      var $loginPage = $('.login.page'); // The login page
-      var $chatPage = $('.chat.page'); // The chatroom page
-      var $chatTitle = $('.chatTitle'); // The chatTitle nav
-    
-      // Prompt for setting a username
-      var username;
-      var connected = false;
-      var typing = false;
-      var lastTypingTime;
-      var $currentInput = $usernameInput.focus();
+      var path = location.pathname;
+      if (path === "/socket") {
+        var FADE_TIME = 150; // ms
+        var TYPING_TIMER_LENGTH = 400; // ms
+        var COLORS = [
+          '#e21400', '#91580f', '#f8a700', '#f78b00',
+          '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
+          '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+        ];
+      
+        // Initialize variables
+        $window = $(window);
+        $sendIcon = $('.sendIcon');
+        $usernameInput = $('.usernameInput'); // Input for username
+        $messages = $('.messages'); // Messages area
+        $inputBox = $('.inputBox');
+        $inputMessage = $('.inputMessage'); // Input message input box
+      
+        $chatBox = $('.pages'); // The chat box
+        $loginPage = $('.login.page'); // The login page
+        $chatPage = $('.chat.page'); // The chatroom page
+        $chatTitle = $('.chatTitle'); // The chatTitle nav
+      
+        // Prompt for setting a username
+        username;
+        connected = false;
+        typing = false;
+        lastTypingTime;
+        $currentInput = $usernameInput.focus();
 
-      var socket = io();
+        socket = io();
 
-      $window.keydown(function (event) {
-        // Auto-focus the current input when a key is typed
-        if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-          $currentInput.focus();
-        }
-        // When the client hits ENTER on their keyboard
-        if (event.which === 13) {
-          if (username) {
-            sendMessage();
-            socket.emit('stop typing');
-            typing = false;
-          } else {
-            setUsername();
+        $window.keydown(function (event) {
+          // Auto-focus the current input when a key is typed
+          if (!(event.ctrlKey || event.metaKey || event.altKey)) {
+            $currentInput.focus();
           }
-        }
-      });
-    
-      // Send event
-      $sendIcon.click(function() {
-        sendMessage();
-      });
-    
-      $inputMessage.on('input', function() {
-        updateTyping();
-      });
-    
-      // Click events
-    
-      // Focus input when clicking anywhere on login page
-      $loginPage.click(function () {
-        $currentInput.focus();
-      });
-    
-      // Focus input when clicking on the message input's border
-      $inputMessage.click(function () {
-        $inputMessage.focus();
-      });
-    
-      // Socket events
-    
-      // Whenever the server emits 'login', log the login message
-      socket.on('login', function (data) {
-        connected = true;
-        // Display the welcome message
-        var message = "Welcome to YY远 Chat Room ";
-        log(message, {
-          prepend: true
+          // When the client hits ENTER on their keyboard
+          if (event.which === 13) {
+            if (username) {
+              sendMessage();
+              socket.emit('stop typing');
+              typing = false;
+            } else {
+              setUsername();
+            }
+          }
         });
-        addParticipantsMessage(data);
-      });
-    
-      // Whenever the server emits 'new message', update the chat body
-      socket.on('new message', function (data) {
-        addChatMessage(data);
-      });
-    
-      // Whenever the server emits 'user joined', log it in the chat body
-      socket.on('user joined', function (data) {
-        log(data.username + ' 进入房间');
-        addParticipantsMessage(data);
-      });
-    
-      // Whenever the server emits 'user left', log it in the chat body
-      socket.on('user left', function (data) {
-        log(data.username + ' 离开房间');
-        addParticipantsMessage(data);
-        removeChatTyping(data);
-      });
-    
-      // Whenever the server emits 'typing', show the typing message
-      socket.on('typing', function (data) {
-        addChatTyping(data);
-      });
-    
-      // Whenever the server emits 'stop typing', kill the typing message
-      socket.on('stop typing', function (data) {
-        removeChatTyping(data);
-      });
-    
-      socket.on('disconnect', function () {
-        log('断开连接');
-      });
-    
-      socket.on('reconnect', function () {
-        log('恢复连接');
-        if (username) {
-          socket.emit('add user', username);
-        }
-      });
-    
-      socket.on('reconnect_error', function () {
-        log('尝试连接失败');
-      });
+      
+        // Send event
+        $sendIcon.click(function() {
+          sendMessage();
+        });
+      
+        $inputMessage.on('input', function() {
+          updateTyping();
+        });
+      
+        // Click events
+      
+        // Focus input when clicking anywhere on login page
+        $loginPage.click(function () {
+          $currentInput.focus();
+        });
+      
+        // Focus input when clicking on the message input's border
+        $inputMessage.click(function () {
+          $inputMessage.focus();
+        });
+      
+        // Socket events
+      
+        // Whenever the server emits 'login', log the login message
+        socket.on('login', function (data) {
+          connected = true;
+          // Display the welcome message
+          var message = "Welcome to YY远 Chat Room ";
+          log(message, {
+            prepend: true
+          });
+          addParticipantsMessage(data);
+        });
+      
+        // Whenever the server emits 'new message', update the chat body
+        socket.on('new message', function (data) {
+          addChatMessage(data);
+        });
+      
+        // Whenever the server emits 'user joined', log it in the chat body
+        socket.on('user joined', function (data) {
+          log(data.username + ' 进入房间');
+          addParticipantsMessage(data);
+        });
+      
+        // Whenever the server emits 'user left', log it in the chat body
+        socket.on('user left', function (data) {
+          log(data.username + ' 离开房间');
+          addParticipantsMessage(data);
+          removeChatTyping(data);
+        });
+      
+        // Whenever the server emits 'typing', show the typing message
+        socket.on('typing', function (data) {
+          addChatTyping(data);
+        });
+      
+        // Whenever the server emits 'stop typing', kill the typing message
+        socket.on('stop typing', function (data) {
+          removeChatTyping(data);
+        });
+      
+        socket.on('disconnect', function () {
+          log('断开连接');
+        });
+      
+        socket.on('reconnect', function () {
+          log('恢复连接');
+          if (username) {
+            socket.emit('add user', username);
+          }
+        });
+      
+        socket.on('reconnect_error', function () {
+          log('尝试连接失败');
+        });
+      }
     }
   }
 

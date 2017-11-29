@@ -1,19 +1,23 @@
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var compression = require('compression');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var handlebars = require('express-handlebars');
+const express = require('express');
+const http = require('http');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const handlebars = require('express-handlebars');
 
-var index = require('./routes/index');
-var port = process.env.PORT || '3000';
+const index = require('./routes/index');
+const port = process.env.PORT || '3000';
 
-var app = express();
-var server = http.Server(app);
-var io = require('socket.io')(server);
+// 环境变量
+const env = process.env.NODE_ENV || 'development';
+const isProd = env === 'production' ? true : false;
+
+const app = express();
+const server = http.Server(app);
+const io = require('socket.io')(server);
 server.listen(port, () => {
   console.log(`🌎  => Server is running on port ${port}`)
 })
@@ -29,6 +33,8 @@ app.engine('hbs', handlebars({
   extname: '.hbs'
 }))
 app.set('view engine', 'hbs');
+// 全局变量
+app.locals.isProd = isProd;
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -36,13 +42,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// 静态资源
+app.use(express.static(path.join(__dirname, isProd ? 'www' : 'public')));
 
 app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -58,10 +65,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var numUsers = 0;
+let numUsers = 0;
 
 io.on('connection', function (socket) {
-  var addedUser = false;
+  let addedUser = false;
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
