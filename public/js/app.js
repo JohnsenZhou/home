@@ -3,10 +3,10 @@ define([
   'canvasBk',
   'socket',
   'typed'
-], function(goOpenSourceUrl, CanvasBk, Socketing, Typing) {
+], function(openSource, CanvasBk, Socketing, Typing) {
   var App = {
     init: function() {
-      goOpenSourceUrl.init();
+      openSource.init();
       CanvasBk.init();
       Socketing.init();
       Typing.init();
