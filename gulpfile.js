@@ -88,6 +88,10 @@ gulp.task('jsmin', function () {
         name: 'main'
       }))
       .pipe(stripDebug())
+      .pipe(uglify({
+        mangle: true,
+        compress: true
+      }))
       .pipe(header(banner, {
         'pkg': require('./package.json')
       }))
