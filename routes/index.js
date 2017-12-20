@@ -16,7 +16,9 @@ const getGithubDetail = (req, res, next) => {
   projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
   let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=d38e228669254510f5b03bc687a78ad90be9f1ad`);
+    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=d38e228669254510f5b03bc687a78ad90be9f1ad`, {
+      timeout: 15000
+    });
   });
   axios.all(axiosList)
     .then(axios.spread((checklist, vue, react, swiper, node) => {
