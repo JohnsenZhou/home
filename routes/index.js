@@ -15,7 +15,6 @@ const cherrypick = (value) => {
 const getGithubDetail = (req, res, next) => {
   projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
-  console.time('getGithubData');
   let axiosList = projectNames.map((url) => {
     return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=d38e228669254510f5b03bc687a78ad90be9f1ad`);
   });
@@ -28,7 +27,6 @@ const getGithubDetail = (req, res, next) => {
       nodeApp = cherrypick(node);
 
       res.locals = { checklistDetail, vueDetail, reactDetail, swiperDetail, nodeApp };
-      console.timeEnd('getGithubData');
       next();
     }))
     .catch((err) => {
