@@ -18,7 +18,7 @@ define([], function() {
     variantSpeed: 0.5,  // 随机速度增长量 Math.random() * xx
     defaultRadius: 4,  // 基本半径
     variantRadius: 6,  // 随机半径增长量 Math.random() * xx
-    linkRadius: 400,  //连线最大距离
+    linkRadius: isMob ? 200 : 330,  //连线最大距离
   };
 
   // 鼠标移入加粒子
