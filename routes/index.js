@@ -2,6 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
+axios.defaults.headers.Authorization = "token dfd";
+axios.defaults.timeout = 10000;
+
 const cherrypick = (value) => {
   return {
     name: value.data.name,
@@ -16,9 +19,7 @@ const getGithubDetail = (req, res, next) => {
   projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
   let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}?access_token=d38e228669254510f5b03bc687a78ad90be9f1ad`, {
-      timeout: 15000
-    });
+    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}`);
   });
   axios.all(axiosList)
     .then(axios.spread((checklist, vue, react, swiper, node) => {
