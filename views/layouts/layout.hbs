@@ -10,7 +10,7 @@
     <title>Johnsen Zhou</title>
     <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
     {{#if isProd}}
-        <link rel="stylesheet" href="/css/app.css">
+        <link rel="stylesheet" href="{{ assetsCss }}">
     {{else}}
         <link rel="stylesheet" href="/dev/app.css">
     {{/if}}
@@ -29,7 +29,7 @@
     
     <script src="/lib/jquery.min.js"></script>
     {{#if isProd}}
-        <script src="/lib/require.js" data-main="./js/main"></script>
+        <script src="/lib/require.js" data-main="{{ assetsJs }}"></script>
     {{else}}
         <script src="/lib/require.js" data-main="./js/main"></script>
     {{/if}}
