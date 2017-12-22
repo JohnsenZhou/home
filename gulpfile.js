@@ -6,6 +6,8 @@ const header = require('gulp-header');
 const nodemon = require('gulp-nodemon');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const rev = require('gulp-rev');
+const runSequence = require('run-sequence');
 const stripDebug = require('gulp-strip-debug');
 const requirejsOptimize = require('gulp-requirejs-optimize');
 const cleanCSS = require('gulp-clean-css');
@@ -76,28 +78,41 @@ gulp.task('cssmin', () => {
     .pipe(header(banner, {
       'pkg': require('./package.json')
     }))
-    .pipe(gulp.dest('www/css'));
+    .pipe(gulp.dest('app'))
 });
 
 gulp.task('jsmin', function () {
   return gulp.src('public/js/main.js')
-      .pipe(sourcemaps.init())
-      .pipe(requirejsOptimize({
-        baseUrl: 'public/js',
-        mainConfigFile: 'public/js/main.js',
-        name: 'main'
-      }))
-      .pipe(stripDebug())
-      .pipe(uglify({
-        mangle: true,
-        compress: true
-      }))
-      .pipe(header(banner, {
-        'pkg': require('./package.json')
-      }))
-      .pipe(gulp.dest('www/js'));
+    .pipe(sourcemaps.init())
+    .pipe(requirejsOptimize({
+      baseUrl: 'public/js',
+      mainConfigFile: 'public/js/main.js',
+      name: 'main'
+    }))
+    .pipe(stripDebug())
+    .pipe(uglify({
+      mangle: true,
+      compress: true
+    }))
+    .pipe(header(banner, {
+      'pkg': require('./package.json')
+    }))
+    .pipe(gulp.dest('app'))
 })
 
-gulp.task('build', ['cssmin', 'jsmin', 'copy'])
+gulp.task('revAssets', function(){
+  return gulp.src(['app/*.css', 'app/*.js'], {
+      base: 'app'
+    })
+    .pipe(rev())
+    .pipe(gulp.dest('www/app'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('www'))
+})
+
+
+gulp.task('build', function(done) {
+  runSequence(['cssmin', 'jsmin'], ['revAssets', 'copy'], done)
+})
 
 gulp.task('default', ['dev'])

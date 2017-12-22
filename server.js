@@ -35,6 +35,11 @@ app.engine('hbs', handlebars({
 app.set('view engine', 'hbs');
 // 全局变量
 app.locals.isProd = isProd;
+if (isProd) {
+  const manifest = require('./www/rev-manifest.json');
+  app.locals.assetsCss = "app/" + manifest['app.css'];
+  app.locals.assetsJs = "app/" + manifest['main.js'];
+}
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
