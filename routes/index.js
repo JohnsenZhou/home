@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-axios.defaults.headers.Authorization = "token dfd";
+axios.defaults.headers.Authorization = "token ddd";
 axios.defaults.timeout = 10000;
 
 const cherrypick = (value) => {
@@ -14,26 +14,26 @@ const cherrypick = (value) => {
     forks: value.data.forks
   }
 }
-
 const getGithubDetail = (req, res, next) => {
   projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
-  let axiosList = projectNames.map((url) => {
-    return axios.get(`https://api.github.com/repos/JohnsenZhou/${url}`);
-  });
-  axios.all(axiosList)
-    .then(axios.spread((checklist, vue, react, swiper, node) => {
-      checklistDetail = cherrypick(checklist);
-      vueDetail = cherrypick(vue);
-      reactDetail = cherrypick(react);
-      swiperDetail = cherrypick(swiper);
-      nodeApp = cherrypick(node);
+  axios.get('https://api.github.com/users/johnsenzhou/repos')
+    .then((data) => {
+      const originData = data.data;
+      const myFavoriteList = projectNames.map((itemName) => {
+        let actionItem;
+        originData.map((item) => {
+          if (item.name === itemName) {
+            actionItem = item;
+          }
+        })
+        return actionItem;
+      })
 
-      res.locals = { checklistDetail, vueDetail, reactDetail, swiperDetail, nodeApp };
+      res.locals.githubList = myFavoriteList;
       next();
-    }))
+    })
     .catch((err) => {
-      // console.log(err);
       res.render('error');
     })
 };
@@ -44,9 +44,7 @@ router.get('/', function(req, res) {
 });
 /* GET open sources page. */
 router.get('/opensources', getGithubDetail, function(req, res) {
-  const githubDetail = res.locals;
-  const githubList = [githubDetail.checklistDetail, githubDetail.vueDetail, githubDetail.reactDetail, githubDetail.swiperDetail, githubDetail.nodeApp];
-  // console.log(githubList)
+  const githubList = res.locals.githubList;
   res.render('pages/demo', { isdemo: true, githubList });
 });
 /* GET socket.io page. */
