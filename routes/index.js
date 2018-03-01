@@ -5,20 +5,11 @@ const router = express.Router();
 axios.defaults.headers.Authorization = "token ddd";
 axios.defaults.timeout = 10000;
 
-const cherrypick = (value) => {
-  return {
-    name: value.data.name,
-    url: value.data.html_url,
-    description: value.data.description,
-    stars: value.data.stargazers_count,
-    forks: value.data.forks
-  }
-}
 const getGithubDetail = (req, res, next) => {
   projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
   axios.get('https://api.github.com/users/johnsenzhou/repos')
-    .then((data) => {
+    .then(data => {
       const originData = data.data;
       const myFavoriteList = projectNames.map((itemName) => {
         let actionItem;
@@ -30,8 +21,18 @@ const getGithubDetail = (req, res, next) => {
         return actionItem;
       })
 
-      res.locals.githubList = myFavoriteList;
-      next();
+      axios.get('https://api.github.com/orgs/ewellfe/repos')
+        .then(data => {
+          const evell = data.data[0]
+          myFavoriteList.push(evell)
+          res.locals.githubList = myFavoriteList
+          next();
+        })
+        .catch((err) => {
+          console.log('evell 获取失败')
+          res.locals.githubList = myFavoriteList
+          next();
+        })
     })
     .catch((err) => {
       res.render('error');
