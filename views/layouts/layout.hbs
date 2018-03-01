@@ -4,11 +4,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="application-name" content="JohnsenZhou's site">
     <meta name="description" content="Johnsen Zhou的个人站点"/>
     <meta name="keywords" content="Johnsen, 博客"/>
     <meta name="author" content="Johnsen">
     <title>Johnsen Zhou</title>
     <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
+    {{#if typed}}
+        <link rel="dns-prefetch" href="//johnsenzhou.com/">
+        <link rel="preconnect" href="http://johnsenzhou.com/opensources">
+        <link rel="prefetch" href="http://johnsenzhou.com/opensources">
+    {{/if}}
     {{#if isProd}}
         <link rel="stylesheet" href="{{ assetsCss }}">
     {{else}}
