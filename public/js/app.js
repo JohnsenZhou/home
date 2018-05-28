@@ -1,14 +1,12 @@
 define([
   'demo',
   'canvasBk',
-  'socket',
   'typed'
-], function(openSource, CanvasBk, Socketing, Typing) {
+], function(openSource, CanvasBk, Typing) {
   var App = {
     init: function() {
       openSource.init();
       CanvasBk.init();
-      Socketing.init();
       Typing.init();
     }
   }

@@ -9,7 +9,6 @@
     <meta name="keywords" content="Johnsen, 博客"/>
     <meta name="author" content="Johnsen">
     <title>Johnsen Zhou</title>
-    <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
     {{#if typed}}
         <link rel="dns-prefetch" href="//johnsenzhou.com/">
         <link rel="preconnect" href="http://johnsenzhou.com/opensources">
@@ -22,11 +21,7 @@
     {{/if}}
 </head>
 <body>
-    {{#if isSocket}}
-
-    {{else}}
-        <canvas id="canvas"></canvas>
-    {{/if}}
+    <canvas id="canvas"></canvas>
     
     {{!--index body--}}
     {{{body}}}
