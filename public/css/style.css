@@ -113,20 +113,26 @@ a {
 }
 
 /* 底部样式 */
-.footer {
-	opacity: 0;
+.footer, .normal-footer {
 	position: absolute;
 	width: 100%;
-	bottom: 4em;
 	text-align: center;
 	font-family: Optima,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
 	color: #999;
+}
+.footer {
+	opacity: 0;
+	bottom: 3em;
 	transition: all .6s;
 	-moz-transition: all .6s; /* Firefox 4 */
 	-webkit-transition: all .6s; /* Safari and Chrome */
 	-o-transition: all .6s; /* Opera */
 }
+.normal-footer {
+	bottom: 2em;
+}
+
 .footer-animate {
 	opacity: 1;
-	bottom: 3em;
+	bottom: 2em;
 }
