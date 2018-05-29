@@ -122,12 +122,3 @@
   -moz-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-.demo-footer {
-  position: absolute;
-	width: 100%;
-	bottom: 4em;
-	text-align: center;
-	font-family: Optima,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
-	color: #999;
-	bottom: 3em;
-}

@@ -140,17 +140,14 @@ define([], function() {
   var CanvasBk = {
     init: function() {
       var path = location.pathname;
-      if (path !== "/socket") {
-        // 监听窗口变化
-        window.addEventListener("resize", function(){
-          deBouncer();
-        });
-        canvasBody = document.getElementById("canvas");
-        drawArea = canvasBody.getContext("2d");
-        
-        setup();
-        resizeReset();
-      }
+      // 监听窗口变化
+      window.addEventListener("resize", function(){
+        deBouncer();
+      });
+      canvasBody = document.getElementById("canvas");
+      drawArea = canvasBody.getContext("2d");
+      setup();
+      resizeReset();
     }
   }
   return CanvasBk;
