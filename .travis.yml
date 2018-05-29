@@ -1,6 +1,14 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 branches:
   only:
   - master
+addons:
+  ssh_known_hosts: 47.94.102.32
+before_install:
+- openssl aes-256-cbc -K $encrypted_bf4d90fc5068_key -iv $encrypted_bf4d90fc5068_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+after_success:
+- ssh travis@47.94.102.32 -o StrictHostKeyChecking=no 'cd /usr/src/home && git pull origin master && npm install && gulp build && pm2 restart pm2.json'
