@@ -35,7 +35,7 @@ const banner = `
 
 gulp.task('nodemon', () => {
   return nodemon({
-    script: 'server',
+    script: './src',
     env: { 'NODE_ENV': 'development' }
   })
 });

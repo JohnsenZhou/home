@@ -1,4 +1,4 @@
-define(["../lib/typed.min"], function(Typed) {
+define(["typedJS", "zepto"], function(Typed, $) {
   var setColor = function() {
     var i = 0;
     setInterval(function() {

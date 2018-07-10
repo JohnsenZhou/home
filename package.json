@@ -3,18 +3,24 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "gulp",
+    "dev": "gulp",
+    "build": "gulp build"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "~1.17.1",
     "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "express-handlebars": "^3.0.0",
     "gulp-clean-css": "^3.9.0",
-    "jade": "~1.11.0",
+    "helmet": "^3.12.1",
+    "joi": "^13.4.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.2",
     "morgan": "~1.8.1",
     "save-dev": "^2.0.0",
     "serve-favicon": "~2.4.2",
@@ -35,6 +41,7 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^3.0.0",
-    "run-sequence": "^2.2.0"
+    "run-sequence": "^2.2.0",
+    "typescript": "^2.9.2"
   }
 }
