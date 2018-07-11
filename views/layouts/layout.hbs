@@ -19,14 +19,6 @@
     {{else}}
         <link rel="stylesheet" href="/dev/app.css">
     {{/if}}
-    {{!-- 谷歌 --}}
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-            google_ad_client: "ca-pub-6060480773345268",
-            enable_page_level_ads: true
-        });
-    </script>
 </head>
 <body>
     <canvas id="canvas"></canvas>
@@ -36,7 +28,6 @@
     <!--引入底部栏模板-->
     {{> footer}}
     
-    <script src="/lib/jquery.min.js"></script>
     {{#if isProd}}
         <script src="/lib/require.js" data-main="{{ assetsJs }}"></script>
     {{else}}

@@ -1,9 +1,8 @@
 {
   "name": "home",
-  "script": "server.js",
+  "script": "src/index.js",
   "env": {
-    "NODE_ENV": "production",
-    "PORT": 8008
+    "NODE_ENV": "production"
   },
   "error_file": "./log/app-err.log",
   "out_file": "./log/app-out.log",
