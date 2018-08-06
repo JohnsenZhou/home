@@ -23,7 +23,7 @@ const app = express();
 const { db } = config;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${db.name}:${db.port}/${db.homesite}`, { useNewUrlParser: true })
+mongoose.connect(`mongodb://${db.name}:${db.port}/${db.area}`, { useNewUrlParser: true })
     .then(() => { console.log('🌈 successfully connect to database'); })
     .catch((err) => { console.log(err); })
 

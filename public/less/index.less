@@ -1,0 +1,77 @@
+/* 主页样式 */
+.info-content {
+	position: absolute;
+	top: 50%;	
+	left: 50%;
+	transform: translate(-50%, -50%);
+  .typed, .typed-cursor {
+    color: #333;
+    font-size: 3em;
+    /* text-shadow: rgba(24, 24, 24, 0.6) 1px 2px 2px; */
+  }
+  .typed-cursor{
+    opacity: 1;
+    font-weight: 100;
+    -webkit-animation: blink 1s infinite;
+    -moz-animation: blink 1s infinite;
+    -ms-animation: blink 1s infinite;
+    -o-animation: blink 1s infinite;
+    animation: blink 1s infinite;
+  }
+  .sites {
+    opacity: 0;
+    margin-top: 3em;
+    text-align: center;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    color: #2196F3;
+    transition: all .6s;
+    -moz-transition: all .6s; /* Firefox 4 */
+    -webkit-transition: all .6s; /* Safari and Chrome */
+    -o-transition: all .6s; /* Opera */
+    &.sites-animate {
+      opacity: 1;
+      margin-top: 1em;
+    }
+    .sites-content {
+      margin-top: 2em;
+      p {
+        margin-bottom: .8em;
+        a {
+          color: #777;
+          &:hover {
+            color: #00B7FF;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-ms-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-o-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}

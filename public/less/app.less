@@ -1,0 +1,43 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	min-height: 100vh;
+	font-family: Futura, sans-serif;
+	font-size: 14px;
+  background: #fff;
+	color: #999;
+}
+a {
+	text-decoration: none;
+}
+::selection {
+	background: rgba(3, 169, 244, 0.56);
+	color: #fff;
+}
+
+/* 底部样式 */
+.footer, .normal-footer {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	font-family: Optima,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+	color: #999;
+}
+.footer {
+	opacity: 0;
+	bottom: 3em;
+	transition: all .6s;
+	-moz-transition: all .6s; /* Firefox 4 */
+	-webkit-transition: all .6s; /* Safari and Chrome */
+	-o-transition: all .6s; /* Opera */
+}
+.normal-footer {
+	bottom: 2em;
+}
+
+.footer-animate {
+	opacity: 1;
+	bottom: 2em;
+}

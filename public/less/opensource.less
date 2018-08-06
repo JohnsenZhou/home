@@ -1,0 +1,169 @@
+.demo-container {
+  display: inline-block;
+  position: absolute;
+  width: 836px;
+  max-height: 800px;
+  top: 40%;
+  left: 50%;
+  overflow: auto;
+  transform: translate(-50%, -50%);
+  .demo-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    .user-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+    }
+    hr {
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: #e2e2e2;
+      border: none;
+      margin: 0 44px;
+    }
+    .user-name {
+      font-size: 20px;
+    }
+  }
+  .demo-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    text-align: left;
+    .demo-item {
+      width: 220px;
+      margin: 1em;
+      padding: 1em;
+      background: #f9f9f9;
+      border: 1px solid #e9e9e9;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 1px 6px -1px #cfcfcf;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      transition: all .3s;
+      &:hover {
+        box-shadow: 0 1px 10px -1px #959595;
+      }
+      .demo-title {
+        font-size: 1.4em;
+        /* text-align: center; */
+      }
+      .demo-icon {
+        margin-top: .5em;
+        &::after{
+          content: '';
+          display: block;
+          width: 100%;
+          height: 2px;
+          background: -ms-linear-gradient(left,#45eaff,#b286ff,#fe9c95,#FFEB3B);
+          background: -moz-linear-gradient(left,#45eaff,#b286ff,#fe9c95,#FFEB3B);
+          background: -o-linear-gradient(left,#45eaff,#b286ff,#fe9c95,#FFEB3B);
+          background: -webkit-linear-gradient(left,#45eaff,#b286ff,#fe9c95,#FFEB3B);
+          background: linear-gradient(left,#45eaff,#b286ff,#fe9c95,#FFEB3B);
+          margin: 1em 0;
+        }
+        .git-detail, .number {
+          display: inline-block;
+          padding: 3px 5px 1px 5px;
+          border: 1px solid #d5d5d5;
+          border-radius: 4px;
+          background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);
+          color: #333;
+          font: 600 12px/14px 'Helvetica Neue',Helvetica,Arial,sans-serif;
+        }
+        .git-detail:hover {
+          background-color: #ddd;
+          background-image: linear-gradient(to bottom,#eee 0,#ddd 100%);
+        }
+        .git-star, .git-fork {
+          padding-left: 20px;
+          background: url(../img/github.png) left center no-repeat;
+          background-size: 16px 16px;
+          text-shadow: 0 1px 0 #fff;
+        }
+        .number {
+          position: relative;
+          margin-right: 1em;
+          &:hover {
+            color: #4183C4;
+          }
+          &::before {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            z-index: 2;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            top: 50%;
+            left: -2px;
+            margin-top: -4px;
+            border-width: 4px 4px 4px 0;
+            border-right-color: #f5f5f5;
+            &:hover {
+              border-right-color: #ddd;
+            }
+          }
+          &::after {
+            content: '';
+            position: absolute;
+            display: inline-block;
+            top: 7px;
+            left: -3px;
+            z-index: 0;
+            width: 4px;
+            height: 4px;
+            background: #ccc;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+}
+/* 移动端样式优化 */
+@media screen and (max-width: 800px) {
+  .demo-container {
+    width: 280px !important;
+    top: 50%;
+    .demo-user {
+      .user-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 30px;
+      }
+      hr {
+        display: block;
+        width: 1px;
+        height: 30px;
+        background: #e2e2e2;
+        border: none;
+        margin: 0 30px;
+      }
+      .user-name {
+        font-size: 18px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .demo-container {
+    width: 560px;
+    top: 50%;
+  }
+}
+@media screen and (max-height: 700px) {
+  .demo-container {
+    max-height: 450px;
+  }
+}
+

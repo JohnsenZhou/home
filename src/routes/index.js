@@ -24,6 +24,10 @@ const getGithubDetail = (req, res, next) => {
         })
         return actionItem;
       })
+      res.locals.githubUser = {
+        name: fetchOneList[0].owner.login,
+        avatar: fetchOneList[0].owner.avatar_url
+      }
       // 团队项目
       const fetchTwoList = fetchTwoData.data[0]
       res.locals.githubList = [...fetchOneList, fetchTwoList]
@@ -42,7 +46,8 @@ router.get('/', function(req, res) {
 /* GET open sources page. */
 router.get('/opensources', getGithubDetail, function(req, res) {
   const githubList = res.locals.githubList;
-  res.render('pages/demo', { isdemo: true, githubList });
+  const githubUser = res.locals.githubUser;
+  res.render('pages/demo', { isdemo: true, githubList, ...githubUser });
 });
 
 module.exports = router;

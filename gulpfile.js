@@ -5,6 +5,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const header = require('gulp-header');
 const nodemon = require('gulp-nodemon');
 const concat = require('gulp-concat');
+const less = require('gulp-less');
 const uglify = require('gulp-uglify');
 const rev = require('gulp-rev');
 const runSequence = require('run-sequence');
@@ -58,7 +59,8 @@ gulp.task('file-watch', (done) => {
 })
 
 gulp.task('cssconcat', () => {
-  return gulp.src('public/css/*.css')
+  return gulp.src('public/less/*.less')
+    .pipe(less())
     .pipe(concat('app.css'))
     .pipe(gulp.dest('public/dev'));
 });
@@ -72,7 +74,8 @@ gulp.task('copy', () => {
 });
 
 gulp.task('cssmin', () => {
-  return gulp.src('public/css/*.css')
+  return gulp.src('public/less/*.less')
+    .pipe(less())
     .pipe(concat('app.css'))
     .pipe(cleanCSS())
     .pipe(header(banner, {

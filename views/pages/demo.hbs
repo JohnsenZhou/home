@@ -1,14 +1,21 @@
-<div class="demo-content">
-  {{#each githubList}}
-    <div class="demo-item" data-url={{html_url}}>
-      <p class="demo-title">{{name}}</p>
-      <div class="demo-icon">
-        <div class="git-detail"><span class="git-star">Star</span></div>
-        <div class="number"><span>{{stargazers_count}}</span></div>
-        <div class="git-detail"><span class="git-fork">Fork</span></div>
-        <div class="number"><span>{{forks_count}}</span></div>
+<div class="demo-container">
+  <div class="demo-user">
+    <img class="user-avatar" src={{avatar} alt="avatar">
+    <hr>
+    <strong class="user-name">{{name}</strong>
+  </div>
+  <div class="demo-content">
+    {{#each githubList}}
+      <div class="demo-item" data-url={{html_url}}>
+        <p class="demo-title">{{name}}</p>
+        <div class="demo-icon">
+          <div class="git-detail"><span class="git-star">Star</span></div>
+          <div class="number"><span>{{stargazers_count}}</span></div>
+          <div class="git-detail"><span class="git-fork">Fork</span></div>
+          <div class="number"><span>{{forks_count}}</span></div>
+        </div>
+        <p>{{description}}</p>
       </div>
-      <p>{{description}}</p>
-    </div>
-  {{/each}}
+    {{/each}}
+  </div>
 </div>
