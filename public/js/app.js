@@ -7,7 +7,7 @@ define([
     init: function() {
       openSource.init();
       CanvasBk.init();
-      Typing.init();
+      Typing;
     }
   }
 
