@@ -8,7 +8,7 @@
     "build": "gulp build"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.18.0",
     "body-parser": "~1.17.1",
     "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
@@ -27,11 +27,8 @@
     "typed.js": "^2.0.5"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
     "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
     "gulp-clean-css": "^3.9.4",
     "gulp-concat": "^2.6.1",
     "gulp-header": "^1.8.9",
