@@ -9,7 +9,7 @@ const fetchOne = () => axios.get('https://api.github.com/users/johnsenzhou/repos
 const fetchTwo = () => axios.get('https://api.github.com/orgs/ewellfe/repos')
 
 const getGithubDetail = (req, res, next) => {
-  projectNames = ['Front-End-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
+  projectNames = ['Front-End-Checklist', 'Front-End-Performance-Checklist', 'vue-mobile-starter', 'react-mobile-starter', 'mSwiper.js', 'NodeApp-Deploy'];
   
   axios.all([fetchOne(), fetchTwo()])
     .then(axios.spread((fetchOneData, fetchTwoData) => {
